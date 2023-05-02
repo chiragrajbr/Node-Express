@@ -3,12 +3,22 @@ let express=require ("express")
 let app=express()
 const port=3005
 
-const costomers=[{id:101,name:"chirag"},{id:102,name:"chirag"}]
+const customers=[{id:101,name:"chirag"},{id:102,name:"chirag"}]
 app.get("/",(req,res)=>{
     res.send("welcome to the website")
 })
-app.get("/costomers",(req,res)=>{
-    res.send(costomers)
+app.get("/customers",(req,res)=>{
+    res.send(customers)
+})
+
+app.get("/customers/:id",(req,res)=>{
+    const id=req.params.id
+    const customer=customers.find(customer=>customer.id==id)
+    if(customer){
+        res.send(customer)
+    }else {
+        res.send({})
+    }
 })
 
 
